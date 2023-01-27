@@ -10,16 +10,7 @@ struct StandupsApp: App {
         Attendee(id: Attendee.ID(UUID()), name: "Blob")
       ]
       StandupsList(
-        model: StandupsListModel(
-//          destination: .detail(
-//            StandupDetailModel(
-//              destination: .record(
-//                RecordMeetingModel(standup: standup)
-//              ),
-//              standup: standup
-//            )
-//          )
-        )
+        model: StandupsListModel()
       )
     }
   }

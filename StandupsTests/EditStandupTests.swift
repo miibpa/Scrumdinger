@@ -1,4 +1,5 @@
 import XCTest
+import Dependencies
 @testable import Standups
 
 class EditStandupTests: XCTestCase {
@@ -22,15 +23,19 @@ class EditStandupTests: XCTestCase {
   }
 
   func testAdd() {
-    let model = EditStandupModel(
-      standup: Standup(id: Standup.ID(UUID()))
-    )
-
-    XCTAssertEqual(model.standup.attendees.count, 1)
-    XCTAssertEqual(model.focus, .title)
-    model.addAttendeeButtonTapped()
-
-    XCTAssertEqual(model.standup.attendees.count, 2)
-    XCTAssertEqual(model.focus, .attendee(model.standup.attendees[1].id))
+      withDependencies {
+          $0.uuid = .incrementing
+      } operation: {
+          let model = EditStandupModel(
+            standup: Standup(id: Standup.ID(UUID()))
+          )
+          
+          XCTAssertEqual(model.standup.attendees.count, 1)
+          XCTAssertEqual(model.focus, .title)
+          model.addAttendeeButtonTapped()
+          
+          XCTAssertEqual(model.standup.attendees.count, 2)
+          XCTAssertEqual(model.focus, .attendee(model.standup.attendees[1].id))
+      }
   }
 }

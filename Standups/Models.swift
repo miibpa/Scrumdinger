@@ -1,6 +1,7 @@
 import IdentifiedCollections
 import SwiftUI
 import Tagged
+import Dependencies
 
 struct Standup: Equatable, Identifiable, Codable {
   let id: Tagged<Self, UUID>
